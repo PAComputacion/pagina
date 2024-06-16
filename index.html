@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina principal</title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px;
+            background: #000000;
+        }
+
+        .navigation {
+            position: relative;
+            width: 1000px;
+            height: 70px;
+            background: linear-gradient(155deg,
+                    #192b6e, #a6307c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+
+        .navigation ul {
+            display: flex;
+            width: 350px;
+        }
+
+        .navigation ul li {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            list-style: none;
+            z-index: 1;
+        }
+
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            color: #fff;
+            transition: .5s;
+        }
+
+        .navigation ul li.active a .icon {
+            transform: translateY(-32px);
+        }
+
+        .navigation ul li a .text {
+            position: absolute;
+            color: #fff;
+            font-weight: 400;
+            font-size: .75em;
+            letter-spacing: .02em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: .5s;
+        }
+
+        .navigation ul li.active a .text {
+            opacity: 1;
+            transform: translateY(12px);
+        }
+
+
+        .navigation ul li a .circle {
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border-radius: 50%;
+            border: 1.8px solid #fff;
+            transform: translateY(-37px) scale(0);
+        }
+
+        .navigation ul li.active a .circle {
+            transition: .5s;
+            transition-delay: .5s;
+            transform: translateY(-37px) scale(1);
+        }
+
+        .indicator {
+            position: absolute;
+            top: -50%;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(0deg, #ffa576, #0951eb);
+            border: 6px solid #06021b;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .5s;
+        }
+
+        .indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-right-radius: 20px;
+            box-shadow: 1px -10px 0 #06021b;
+        }
+
+        .indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-left-radius: 20px;
+            box-shadow: -1px -10px 0 #06021b;
+        }
+
+        .navigation ul li:nth-child(1).active~.indicator {
+            transform: translateX(calc(70px * 0));
+        }
+
+        .navigation ul li:nth-child(2).active~.indicator {
+            transform: translateX(calc(70px * 1));
+        }
+
+        .navigation ul li:nth-child(3).active~.indicator {
+            transform: translateX(calc(70px * 2));
+        }
+
+        .navigation ul li:nth-child(4).active~.indicator {
+            transform: translateX(calc(70px * 3));
+        }
+
+        .navigation ul li:nth-child(5).active~.indicator {
+            transform: translateX(calc(70px * 4));
+        }
+
+
+        /* -- YouTube Link Styles -- */
+
+        #source-link {
+            top: 60px;
+        }
+
+        #source-link>i {
+            color: rgb(94, 106, 210);
+        }
+
+        #yt-link {
+            top: 10px;
+        }
+
+        #yt-link>i {
+            color: rgb(219, 31, 106);
+
+        }
+
+        .meta-link {
+            align-items: center;
+            backdrop-filter: blur(3px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: inline-flex;
+            gap: 5px;
+            left: 10px;
+            padding: 10px 20px;
+            position: fixed;
+            text-decoration: none;
+            transition: background-color 600ms, border-color 600ms;
+            z-index: 10000;
+        }
+
+        .meta-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .meta-link>i,
+        .meta-link>span {
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .meta-link>span {
+            color: white;
+            font-family: "Rubik", sans-serif;
+            transition: color 600ms;
+        }
+
+        .texto {
+            color: #fff;
+            position: relative;
+            width: 400px;
+            height: 70px;
+            background: transparent;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            border-radius: 10px;
+        }
+.solo{
+    color: #fff;
+    align-items: center;
+    font-weight: 100;
+    font-family: Arial, sans-serif;
+}
+.container {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    align-items: center; /* Centra horizontalmente los elementos */
+    margin-top: 40px;
+}
+
+.spacer {
+    height: 20px; /* Puedes ajustar el valor según sea necesario */
+}
+.hidden {
+    display: none;
+}
+@media only screen and (max-width: 600px) {
+  html, body {
+  height: 100%;
+  margin-left: auto;
+}
+
+  .page-content {
+    grid-template-columns: 1fr; /* Cambiar a una sola columna */
+    justify-items: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    text-align: center; /* Centrar el texto */
+  }
+
+  .card {
+    margin-left: auto; /* Reiniciar el margen izquierdo */
+    margin-right: auto; /* Reiniciar el margen derecho */
+    margin-bottom: 2rem; /* Agregar espacio entre tarjetas */
+    max-width: 90%; /* Reducir el tamaño máximo de la tarjeta */
+  }
+
+  .card:after {
+    transform: translateY(0);
+  }
+
+  .content {
+    background-color: rgba(145, 184, 184, 0.137);
+    transform: translateY(calc(100% - 4.5rem));
+    padding: 0.5rem; /* Reducir el relleno en dispositivos móviles */
+  }
+  .content > *:not(.title) {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: transform var(--d) var(--e), opacity var(--d) var(--e);
+  }
+  
+
+  .card:hover,
+.card:focus-within {
+    align-items: center;
+  }
+  .card:hover:before,
+.card:focus-within:before {
+    transform: translateY(-4%);
+  }
+  .card:hover:after,
+.card:focus-within:after {
+    transform: translateY(-50%);
+  }
+  .card:hover .content,
+.card:focus-within .content {
+    transform: translateY(0);
+  }
+  .card:hover .content > *:not(.title),
+.card:focus-within .content > *:not(.title) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--d) / 8);
+  }
+
+  .card:focus-within:before, .card:focus-within:after,
+.card:focus-within .content,
+.card:focus-within .content > *:not(.title) {
+    transition-duration: 10s;
+  }
+}
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px;
+            background: #000000;
+        }
+
+        .navigation {
+            position: relative;
+            width: 1000px;
+            height: 70px;
+            background: linear-gradient(155deg,
+                    #192b6e, #a6307c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+
+        .navigation ul {
+            display: flex;
+            width: 350px;
+        }
+
+        .navigation ul li {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            list-style: none;
+            z-index: 1;
+        }
+
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            color: #fff;
+            transition: .5s;
+        }
+
+        .navigation ul li.active a .icon {
+            transform: translateY(-32px);
+        }
+
+        .navigation ul li a .text {
+            position: absolute;
+            color: #fff;
+            font-weight: 400;
+            font-size: .75em;
+            letter-spacing: .02em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: .5s;
+        }
+
+        .navigation ul li.active a .text {
+            opacity: 1;
+            transform: translateY(12px);
+        }
+
+
+        .navigation ul li a .circle {
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border-radius: 50%;
+            border: 1.8px solid #fff;
+            transform: translateY(-37px) scale(0);
+        }
+
+        .navigation ul li.active a .circle {
+            transition: .5s;
+            transition-delay: .5s;
+            transform: translateY(-37px) scale(1);
+        }
+
+        .indicator {
+            position: absolute;
+            top: -50%;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(0deg, #ffa576, #0951eb);
+            border: 6px solid #06021b;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .5s;
+        }
+
+        .indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-right-radius: 20px;
+            box-shadow: 1px -10px 0 #06021b;
+        }
+
+        .indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-left-radius: 20px;
+            box-shadow: -1px -10px 0 #06021b;
+        }
+
+        .navigation ul li:nth-child(1).active~.indicator {
+            transform: translateX(calc(70px * 0));
+        }
+
+        .navigation ul li:nth-child(2).active~.indicator {
+            transform: translateX(calc(70px * 1));
+        }
+
+        .navigation ul li:nth-child(3).active~.indicator {
+            transform: translateX(calc(70px * 2));
+        }
+
+        .navigation ul li:nth-child(4).active~.indicator {
+            transform: translateX(calc(70px * 3));
+        }
+
+        .navigation ul li:nth-child(5).active~.indicator {
+            transform: translateX(calc(70px * 4));
+        }
+
+
+        /* -- YouTube Link Styles -- */
+
+        #source-link {
+            top: 60px;
+        }
+
+        #source-link>i {
+            color: rgb(94, 106, 210);
+        }
+
+        #yt-link {
+            top: 10px;
+        }
+
+        #yt-link>i {
+            color: rgb(219, 31, 106);
+
+        }
+
+        .meta-link {
+            align-items: center;
+            backdrop-filter: blur(3px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: inline-flex;
+            gap: 5px;
+            left: 10px;
+            padding: 10px 20px;
+            position: fixed;
+            text-decoration: none;
+            transition: background-color 600ms, border-color 600ms;
+            z-index: 10000;
+        }
+
+        .meta-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .meta-link>i,
+        .meta-link>span {
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .meta-link>span {
+            color: white;
+            font-family: "Rubik", sans-serif;
+            transition: color 600ms;
+        }
+
+        .texto {
+            color: #fff;
+            position: relative;
+            width: 400px;
+            height: 70px;
+            background: transparent;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            border-radius: 10px;
+        }
+.solo{
+    color: #fff;
+    align-items: center;
+    font-weight: 300px;
+    font-family: "Mulish", sans-serif;
+    width: 80%;
+}
+.container {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    align-items: center; /* Centra horizontalmente los elementos */
+    margin-top: 40px;
+}
+
+.spacer {
+    height: 20px; /* Puedes ajustar el valor según sea necesario */
+}
+.h1{
+    font-weight: lighter;
+}
+.card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  left: -150;
+  padding: 1rem;
+  width: 50%;
+  text-align: center;
+  text-decoration: none;
+  color: whitesmoke;
+  background-color: whitesmoke;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir toda la tarjeta */
+    background-position: center;
+
+}
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  background-size: cover;
+  background-position: 0 0;
+  transition: transform calc(var(--d) * 1.5) var(--e);
+  pointer-events: none;
+}
+.card:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.009) 11.7%, rgba(0, 0, 0, 0.034) 22.1%, rgba(0, 0, 0, 0.072) 31.2%, rgba(0, 0, 0, 0.123) 39.4%, rgba(0, 0, 0, 0.182) 46.6%, rgba(0, 0, 0, 0.249) 53.1%, rgba(0, 0, 0, 0.32) 58.9%, rgba(0, 0, 0, 0.394) 64.3%, rgba(0, 0, 0, 0.468) 69.3%, rgba(0, 0, 0, 0.54) 74.1%, rgba(0, 0, 0, 0.607) 78.8%, rgba(0, 0, 0, 0.668) 83.6%, rgba(0, 0, 0, 0.721) 88.7%, rgba(0, 0, 0, 0.762) 94.1%, rgba(0, 0, 0, 0.79) 100%);
+  transform: translateY(-50%);
+  transition: transform calc(var(--d) * 2) var(--e);
+  text-decoration: none;
+}
+.card:nth-child(1):before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 200%;
+  height: 110%;
+  background-size: cover;
+  background-position: 0 0;
+  transition: transform calc(var(--d) * 1.5) var(--e);
+  pointer-events: none;
+}
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  transition: transform var(--d) var(--e);
+  z-index: 1;
+}
+.content > * + * {
+  margin-top: 1rem;
+}
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.copy {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+@media (hover: hover) and (min-width: 600px) {
+  .card:after {
+    transform: translateY(0);
+  }
+
+  .content {
+    background-color: rgba(145, 184, 184, 0.137);
+    transform: translateY(calc(100% - 4.5rem));
+  }
+  .content > *:not(.title) {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: transform var(--d) var(--e), opacity var(--d) var(--e);
+  }
+
+  .card:hover,
+.card:focus-within {
+    align-items: center;
+  }
+  .card:hover:before,
+.card:focus-within:before {
+    transform: translateY(-4%);
+  }
+  .card:hover:after,
+.card:focus-within:after {
+    transform: translateY(-50%);
+  }
+  .card:hover .content,
+.card:focus-within .content {
+    transform: translateY(0);
+  }
+  .card:hover .content > *:not(.title),
+.card:focus-within .content > *:not(.title) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--d) / 8);
+  }
+
+  .card:focus-within:before, .card:focus-within:after,
+.card:focus-within .content,
+.card:focus-within .content > *:not(.title) {
+    transition-duration: 10s;
+  }
+}
+.containerab {
+            background-color: #000000;
+    border: 1px;
+    padding: 4px;
+    cursor: pointer;
+    transform: scale(1.15);
+    box-shadow: 0 0 10px #ffa420;
+    margin: 10px;
+border-radius: 10px;}
+
+
+        .card:hover {
+    cursor: pointer;
+    transform: scale(1.15);
+    box-shadow: 0 0 20px #00fffc;
+    transform: translateX(1px);
+    transition: 1000ms all;
+  }
+  .card.special {
+    width: 80px;
+  }
+  :root {
+  --d: 700ms;
+  --e: cubic-bezier(0.19, 1, 0.22, 1);
+  --font-sans: "Rubik", sans-serif;
+  --font-serif: "Cardo", serif;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente los elementos */
+    margin-top: 40px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding: 1rem;
+    width: 50%; /* Ancho de la tarjeta */
+    text-align: center;
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: whitesmoke;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
+    touch-action: manipulation;
+    background-image: url('ruta_de_la_imagen.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir toda la tarjeta */
+    background-position: center center; /* Centra la imagen horizontal y verticalmente */
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 1rem;
+    width: 50%; /* Ancho de la tarjeta */
+    text-align: center;
+    text-decoration: none;
+    color: whitesmoke;
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir toda la tarjeta */
+    background-position: center center; /* Centra la imagen horizontal y verticalmente */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
+    touch-action: manipulation;
+    margin-left: auto; /* Centra horizontalmente */
+    margin-right: auto; /* Centra horizontalmente */
+}
+.card:nth-child(1):before {
+content: "";
+position: absolute;
+top: 0;
+width: 200%;
+height: 110%;
+background-size: cover;
+background-position: 0 0;
+ /* Nueva URL de imagen */
+transition: transform calc(var(--d) * 1.5) var(--e);
+pointer-events: none;
+}
+.card:nth-child(2):before {
+  background-image: url(https://manuelfelipevargar.com/wp-content/uploads/2023/04/Manuelphilvar_philosophy_3d5f8260-84c9-4b9a-ad83-a426996de78e.webp);
+}
+
+.card:nth-child(3):before {
+  background-image: url(https://i0.wp.com/static.vecteezy.com/system/resources/previews/001/311/814/non_2x/programming-and-coding-concept-vector.jpg?w=1290&ssl=1);
+  left: -140px;
+  width: 200%;
+  height: 110%;
+  max-height: 1000%;
+}
+
+.card:nth-child(4):before {
+  background-image: url(https://blog.corponet.com/hs-fs/hubfs/1068.jpg?width=1800&name=1068.jpg);
+  left: -200px;
+  width: 200%;
+  height: 110%;
+  max-height: 1000%;
+}
+
+/* Estilos base para .meta-link */
+.meta-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+}
+
+.meta-link:hover {
+    background-color: #e0e0e0;
+}
+
+/* Estilos para íconos en .meta-link */
+.meta-link>i {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+/* Estilos para texto en .meta-link */
+.meta-link>span {
+    font-size: 14px;
+}
+
+/* Media query para dispositivos móviles (menos de 600px de ancho) */
+@media only screen and (max-width: 600px) {
+    .meta-link {
+        padding: 5px 10px;  /* Ajuste de padding para dispositivos móviles */
+    }
+
+    .meta-link>i,
+    .meta-link>span {
+        font-size: 12px;  /* Ajuste de tamaño de fuente para dispositivos móviles */
+    }
+}
+@media (min-width: 600px) {
+  .page-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 800px) {
+  .page-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.youtube-audio-container {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <div class="navigation">
+
+        <span class="texto">
+            <h1>Proyecto aula</h1>
+        </span>
+        <ul>
+            <li class="list active" id="inicio-link">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="text">Inicio</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list" id="otros-proyectos-link">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </span>
+                    <span class="text solo">Otros proyectos...</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list" id="politecnico-link">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="school-outline"></ion-icon>
+                    </span>
+                    <span class="text">Politecnico</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list" id="cecyt-link">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="ribbon-outline"></ion-icon>
+                    </span>
+                    <span class="text">CECyT</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <li class="list" id="integrantes-link">
+                <a>
+                    <span class="icon">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </span>
+                    <span class="text">Integrantes</span>
+                    <span class="circle"></span>
+                </a>
+            </li>
+            <div class="indicator"></div>
+        </ul>
+    </div>
+    <div class="spacer"></div>
+
+    <div class="solo info-container" id="inicio-info">
+        <h3 class="contenido">Inicio<br>En este pagina hecha en la materia de computacion, se muestra un menu interactivo en el cual hay cinco apartado: <br> °Inicio (Direcciona a esta pagina) <br>°Otros proyectos...(Son proyectos hechos en otras materias)<br>°Politecnico (Informacion sobre el politecnico, su historia y origen y mas...) <br> °Voca (Informacion sobre el CECyT 2, su historia y origen y mas...) <br> °Integrantes (Personas que trabajaron en este proyecto) </h3>
+    </div>
+    <div class="solo info-container hidden" id="otros-proyectos-info" >
+        <main class="page-content">
+            <div style="display: flex;">
+            <div class="card agrandara image" style="width: 25%; height: 450px; margin-right: 15px; background-image: url(https://3.bp.blogspot.com/-jKGvcnnmNrA/V-mPD0vCu7I/AAAAAAAAAts/tyMbHJBnBrITcaj4XDcHJXXJXeSd6TJ8gCLcB/s1600/shutterstock_253966762.jpg);
+            top: 0;
+            background-size: cover;
+            background-position: 0 0;
+            transition: transform calc(var(--d) * 1.5) var(--e);">
+              <div class="content">
+                <h2 class="title"> Biologia</h2>
+                <p class="copy">El proyecto aula esta enfocado en los logros y exitos del cecyt 2</p>
+                <button class="btn containerab" onclick="window.location.href='https://pacomputacion.github.io/Biologia/'" style="color: white;">Descargar pdf</button>
+              </div>
+            </div>
+            
+            <div class="card agrandara" style="width: 25%; height: 450px; margin-right: 10px;">
+              <div class="content">
+                <h2 class="title"> Filosofia</h2>
+                <p class="copy" >En esta materia trabajamos dos partes, la primera fue buscar definiciones de 40 conceptos que nos proporciono la maestra y la segunda fue hacer sus juicios categoricos de cada uno de los conceptos</p>
+                <button class="btn containerab" onclick="window.location.href='https://pacomputacion.github.io/Filosofia/'" style="color: white;">Descargar pdf de la primera parte</button>
+                <button class="btn containerab"  onclick="window.location.href='https://pacomputacion.github.io/Filosofia2/'" style="color: white;" >Descargar pdf de la segunda parte</button>
+              </div>
+            </div>
+        
+            <div class="card agrandara"style="width: 25%; height: 450px; margin-right: 10px;">
+              <div class="content">
+                <h2 class="title"> Computacion</h2>
+                <p class="copy">En la materia desarrollamos la creacion de una pagina web y su resultado es esta</p>
+              </div>
+            </div>
+        
+            <div class="card agrandara" style="width: 25%; height: 450px; margin-right: 10px;">
+              <div class="content">
+                <h2 class="title"> Comunicacion y Liderazgo</h2>
+                <p class="copy">Con relacion a esta materia podemos identificar el apoyo de los maestros hacia los alumnos de manera que lo representamos en el proyecto aula</p>
+                <button class="btn containerab" onclick="window.location.href='https://pacomputacion.github.io/Comunicacion/'" style="color: white;">Descargar pdf de la primera parte</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="solo info-container hidden" id="politecnico-info">
+        <div class="solo">
+            <h1 class="h1" align="center">                                           Politecnico</h1><br><br>
+            <h2>Misión Institucional</h2>
+        Somos la institución de educación tecnológica de México, que genera talento profesional, de investigación e innovación para el desarrollo social, humanístico, sustentable, económico y tecnológico del país, con reconocimiento internacional, con base en el fomento de la cultura, la creatividad y emprendeduría en nuestros estudiantes, a través de la vinculación con los sectores productivo y social, con valores y principios institucionales.
+        <br><br>
+        <h2>Visión</h2>
+        En el 2036 seremos la institución de educación tecnológica de calidad, con enfoque de sustentabilidad, sentido de identidad y reconocimiento Internacional, posicionándonos entre las mejores universidades del mundo, a través de la colaboración internacional con las mejores escuelas y centros de investigación, convirtiéndonos en líder por las contribuciones a la ciencia y tecnología, con impacto y sentido de responsabilidad social, respetando la diversidad y equidad de género.
+        <br>
+        <br><h2>Escudo</h2>
+        Fueron las inquietudes estudiantiles quienes tomaron la iniciativa para crear los símbolos que identificaran a la naciente institución politécnica. En los años 1944-1945 la Federación Nacional de Estudiantes Técnicos (FNET) lanzó una convocatoria para diseñar un escudo representativo de las escuelas que integraban el IPN. El primer lugar fue otorgado al alumno Armando López Fonseca quien con ayuda de su compañero Jorge Grajales, lograron que su diseño fuera el ganador. El escudo fue modificado en 1948 conservando sus elementos originales.
+        <br>
+        <br><h2>Lema: "La Técnica al Servicio de la Patria"</h2>
+        El lema era utilizado por algunos estudiantes desde antes de la creación del IPN, pero fue durante el Primer Congreso Nacional de Estudiantes Técnicos, realizado en la ciudad de Chihuahua en 1937, donde el estudiante Jesús Robles propuso utilizar la frase La Técnica al Servicio de una Patria Mejor. Años más tarde este lema fue modificado por “La Técnica al Servicio de la Patria”, el cual expresa los ideales del Politécnico.
+        <br>
+        <br><h2>Himno</h2>
+        Para obtener el Himno se convocó a un concurso abierto para su creación, pero no hubo eco al llamado. Luego de dos nuevas convocatorias, la poetisa Carmen de la Fuente resultó triunfadora del certamen y la Dirección General del Instituto le premió, el 15 de julio de 1961. Posteriormente, como la música aún no estaba elegida, se convocó a un certamen para poner música a la letra del himno del IPN, y resultó triunfador Armando González Domínguez, pianista reconocido y director de varias orquestas.
+        <br><br>
+         <h3>Letra del Himno del Instituto Politécnico Nacional:</h3>
+        Politécnico, fragua encendida con la chispa del genio creador en ti forja su nueva estructura nuestra noble y pujante nación. En la aurora de un día venturoso te dio vida la Revolución; una estrella te puso en las manos, ¡que no apague su limpio fulgor!
+        
+        (CORO)
+        
+        Su libertad México crea, surge la Patria nace la luz; nos convoca tu voz, Politécnico, nos conduce tu amor, juventud.
+        
+        En dinámico anhelo conjugas las dos fuerzas de un mundo viril: es la ciencia crisol de esperanzas es la técnica, fuerza motriz.
+        
+        Guinda y blanco, indómita almena que defiende tu ardor juvenil, oriflama en las lides gallardas en tus manos triunfal banderín.
+        
+        (CORO)
+        
+        Tus brigadas de nítida albura ciencia augusta, saber bondad, en su diaria tarea resplandecen
+        
+        Energía que modelas paisajes insurgente y activo soñar, un humano concepto sostiene tu cultura de ser integral.
+        
+        (CORO)
+        
+        Mueve al hombre tu fe constructiva, se oye el ritmo de su despertar, sinfonía de las urbes fabriles alma agreste de un himno rural.
+        
+        Corazón valeroso y ardiente que edificas baluarte de paz, solidaria su acción con tus filas, vive el pueblo tu hermosa verdad.
+        
+        <br><br>
+        <h2>Historia</h2>
+        En 1932 surgió la idea de integrar y estructurar un sistema de enseñanza técnica, proyecto en el cual participaron destacadamente el licenciado Narciso Bassols y los ingenieros Luis Enrique Erro y Carlos Vallejo Márquez.
+        
+        Sus conceptos se cristalizaron en 1936, gracias a Juan de Dios Bátiz, entonces senador de la República y al general Lázaro Cárdenas del Río, Presidente Constitucional de los Estados Unidos Mexicanos, proponiendo llevar a cabo los postulados de la Revolución Mexicana en materia educativa; dando así nacimiento a una sólida casa de estudios: el Instituto Politécnico Nacional.
+        
+        Sus fundadores concibieron al Politécnico como un motor de desarrollo y espacio para la igualdad; apoyando por una parte, el proceso de industrialización del país y, por la otra, brindando alternativas educativas a todos los sectores sociales, en ​especial a los menos favorecidos.​
+        <br><br>
+        <h2>Elementos Institucionales:</h2>
+        <h2>Mascota</h2>
+        Es tradición que las Instituciones de Educación Superior, y particularmente los equipos deportivos, elijan una mascota; la del Instituto Politécnico Nacional es un burro blanco. Se conocen por tradición oral diferentes versiones que al paso del tiempo se funden entre la realidad y el mito, el caso del Instituto Politécnico Nacional es de las más conocidas, la razón es muy particular. Se dice que al establecer los límites del terreno donde se construía el Instituto, en la Ex Hacienda de Santo Tomás durante los años 30, quedó encerrada una burra blanca; al ser descubierta por los estudiantes e integrantes del primer equipo de fútbol americano la tomaron como su mascota. Con el paso de los años, la burra se convirtió en uno de los símbolos del Politécnico, fundamentalmente en el ámbito deportivo.
+        <br><br>
+        <h2>Decálogo</h2>
+        <ul>°Porque aspiro a ser todo un hombre</ul>
+        <ul>°Porque exijo mis deberes antes que mis derechos,</ul>
+        <ul>°Por convicción y no por circunstancia </ul>
+        <ul>°Para alcanz​ar las conquistas universales y ofrecerlas a mi pueblo</ul>
+        <ul>°Porque me d​uele la Patria en mis entrañas y aspiro a calmar sus dolencias</ul>
+        <ul>°Porque ardo en deseos de despertar al hermano dormido</ul>
+        <ul>°Para prender una antorcha en el altar de la Patria</ul>
+        <ul>°Porque me dignifico y siento el deber de dignificar a mi institución</ul>
+        <ul>°Porque mi respetada libertad de joven y estudiante me impon​e la razón de respetar este recinto</ul>
+        <ul>°Porque traduzco la tricromía de mi bandera como trabajo, deber y honor​</ul>
+        <br>
+        <h2>Porra</h2>
+        Uno de los deportes que creció junto con el Politécnico fue el fútbol americano. Desde sus inicios ha dejado profunda huella entre sus seguidores, quienes para apoyarlo han entonado diferentes porras: desde el chiquitibum hasta el huélum; sin embargo, es éste el que ha permanecido vigente a través de un grito de fiesta para celebrar y cerrar todos los eventos. El 16 de marzo de 1985 el autor de la porra, Víctor Chambón Burgoa, hizo el siguiente relato:
+        
+        En 1937, al saber que había hecho algunas canciones que cantábamos los jugadores de fútbol americano del IPN, se acercó a mí un grupo de muchachos y muchachas que estaban iniciando el primer núcleo de directores de la porra del Politécnico. Ahora bien, en el Poli, la palabra para reunir a los estudiantes era -¡huelga, huelga!-. Basado en esto, sugerí que se utilizara la palabra 'huélum'. Además, decidimos que no se utilizara la palabra 'rah, rah', porque ya estaba en el 'Goya' y era una palabra porrística usada casi en todo Estados Unidos. Por otro lado, una muchacha hizo el comentario que el Poli era la 'gloria'. Otra persona insistía que la porra debía ser de mucho 'pegue' y como consecuencia natural, brotó la 'cachiporra'. Total, después de un par de horas de pláticas y discusiones, salió la que ustedes conocen".<br>
+        <div id="video-container">
+            <iframe width="50%" height="300px" src="https://www.youtube.com/embed/QAQ0PfzBlRI?si=DA0U13EGSZI09Op9" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+    </div>
+    <div class="solo info-container hidden" id="cecyt-info">
+        <div class="solo">
+            <h1 class="h1" align="center"> CECyt 2</h1>
+            <br><br>
+            <h2>Historia: </h2>
+            En 1972 las Vocacionales amplían su ciclo escolar de 2 a 3 años, adoptando cada una el nombre de Centro de Estudios Científicos y Tecnológicos (CECyT's) en sus respectivas especialidades. Esto ocurrió siendo director del I.P.N. el Ing. Manuel Zorrilla Carcaño.
+
+            En 1974 el Consejo Técnico Consultivo General acordó que a todos los Centros de Estudios Científicos y Tecnológicos se les designara no con un número sino con el nombre de ilustres mexicanos, así para 1976 el C.E.C.yT. 2 cambió su denominación al de Centro de Estudios Científicos y Tecnológicos "Miguel Bernard "
+
+            En 1936 se crea el Instituto Politécnico Nacional al agrupar las Escuelas Técnicas de la época, teniendo como objetivo formar profesionales altamente calificados que dieran respuesta a las necesidades de la Industria.​​​​​​​​​​​​​​​​​Otra escuela de esa época era la Escuela de Pequeñas Industrias (E.P.I.), que dependía del Departamento de Fomento Industrial de la Secretaría de Industria, Comercio y Trabajo, cuyo titular fue el Lic. Miguel A​lessio Robles.​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+            <br><br>
+            <center><img src="https://www.cecyt2.ipn.mx/assets/files/cecyt2/uploads/mision_1.jpg" width="80%"><br><br>
+            <img src="https://www.cecyt2.ipn.mx/assets/files/cecyt2/uploads/vision_2.jpg" width="80%"><br><br>
+            <img src="https://www.cecyt2.ipn.mx/assets/files/cecyt2/uploads/objetivos_1.jpg" width="80%"></center>
+            <h2>Escudo:</h2>
+            <center><img src="https://www.cecyt2.ipn.mx/assets/files/cecyt2/img/conocenos/escudo.jpg" width="80%"></center>
+        </div>
+    </div>
+    <div class="solo info-container hidden" id="integrantes-info">
+        <div class="solo">
+            <div class="card agrandara" style="background-image: url('https://static.vecteezy.com/system/resources/previews/001/225/154/original/black-low-poly-geometric-background-vector.jpg')" >
+                <div class="content" >
+                  <h2 class="title"> Integrantes</h2>
+                  <p class="copy"> °Carrasco Montoya Edgar <br> °Cruz Barrios Emanuel <br> °Perez Hipolito Jose Efrain <br> °Tinajero Rodriguez Pedro Isai </p>
+                </div>
+              </div>
+        </div><BR><BR>
+    <div class="max-w-md mx-auto p-4" >
+    <h2 class="text-2xl font-bold mb-4">Formulario</h2>
+    <form>
+        <div class="mb-4">
+            <label for="question1" class="block text-sm font-medium text-zinc-700">1. ¿Qué te pareció esta pagina web?</label><br>
+            <textarea id="question1" name="question1" rows="2" ></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="question2" class="block text-sm font-medium text-zinc-700">2. ¿Cuales son tus sugerencias?</label><br>
+            <textarea id="question2" name="question2" rows="2" ></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="question3" class="block text-sm font-medium text-zinc-700">3. ¿La página cumplió con su función?</label><br>
+            <textarea id="question3" name="question3" rows="2" ></textarea>
+        </div>
+        <div class="mb-4">
+            <label for="question4" class="block text-sm font-medium text-zinc-700">4. Del 1 al 10, ¿Cual es tu grado se satisfaccion en esta pagina?</label><br>
+            <input type="number" id="question4" name="question4" min="1" max="10" >
+        </div><br>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Enviar</button>
+    </form>
+</div>
+    </div>
+    <div class="youtube-audio-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/RnkYSNA0-tA?autoplay=1&loop=1&playlist=RnkYSNA0-tA&controls=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+</div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        const listItems = document.querySelectorAll('.list');
+        const infoContainers = document.querySelectorAll('.info-container');
+
+        function activeLink() {
+            listItems.forEach((item) => item.classList.remove('active'));
+            this.classList.add('active');
+
+            const selectedId = this.getAttribute('id').replace('-link', '-info');
+
+            infoContainers.forEach(container => container.classList.add('hidden'));
+            document.getElementById(selectedId).classList.remove('hidden');
+        }
+
+        listItems.forEach((item) => item.addEventListener('click', activeLink));
+    </script>
+        <script>
+        // Función para cargar el enlace de audio desde YouTube
+        function cargarAudioDesdeYouTube() {
+            var videoId = 'RnkYSNA0-tA'; // Aquí el ID del video de YouTube
+
+            // Hacemos una solicitud a la API de YouTube Data para obtener detalles del video
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://www.googleapis.com/youtube/v3/videos?id=' + videoId + '&key=TU_API_KEY&part=contentDetails', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.items.length > 0) {
+                        var videoDuration = response.items[0].contentDetails.duration;
+                        var videoUrl = 'https://www.youtube.com/watch?v=' + videoId;
+                        var audioUrl = videoUrl.replace('youtube.com/watch?v=', 'youtube.com/embed/') + '/audio';
+                        
+                        // Una vez obtenido el enlace directo al audio, lo asignamos al reproductor de audio HTML5
+                        var audioElement = document.getElementById('youtube-audio');
+                        audioElement.src = audioUrl;
+                        audioElement.play();
+                    }
+                } else {
+                    console.error('Error al cargar detalles del video desde YouTube.');
+                }
+            };
+            xhr.send();
+        }
+
+        // Llamamos a la función para cargar el audio cuando la página esté lista
+        window.onload = function() {
+            cargarAudioDesdeYouTube();
+        };
+    </script>
+</body>
+
+</html>
